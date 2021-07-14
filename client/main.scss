@@ -1,0 +1,177 @@
+@import "../sass/_variables.scss";
+body {
+  padding: 2rem;
+  margin: 0;
+  font-family: sans-serif;
+  background-color: $body-background-gray;
+  font-size: $default-font-size;
+  font-family: $font-family;
+  color: $primary-dark-gray;
+  .app-bar {
+    display: flex;    
+    justify-content: center;
+  }
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .login-container {
+      display: flex;
+      width: 20%;
+      min-width: 300px;
+      margin: 2rem;
+      padding: 1.75rem;
+      background: $gray-blue;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: space-between;
+        width: 100%;
+        gap: 1.2rem;
+        .login-line {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          .input-label {
+            color: $body-background-gray;
+          }
+          .login-button {
+            margin-top: 15px;
+            width: 30%;
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+
+    .user {
+      margin-bottom: 1rem;
+      .logout {
+        cursor: pointer;
+      }
+    }
+
+    .task-actions-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 2rem;
+      background: $gray-blue;
+      .task-form {
+        display: flex;
+        width: 80%;
+        .input {
+          padding: 10px;
+          width: 60%;
+        }
+      }
+      .btn {
+        padding: 10px;
+      }
+    }
+
+    .tasks {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      .task-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        margin-top: 1rem;
+        background: $body-background-gray;
+        box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        .checkbox-container {
+          display: flex;
+          align-items: center;
+          position: relative;
+          padding-left: 2rem;
+          cursor: pointer;
+          font-size: 22px;
+          user-select: none;
+          .select-text {
+            margin-left: 0.75rem;
+            padding: 5px;
+            font-size: 16px;
+          }
+          input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+            &:checked ~ .checkmark {
+              background-color: $deep-blue;
+              border: 2px solid $deep-blue;
+              &:after {
+                display: block;
+              }
+            }
+          }
+          .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            border: 2px solid $gray-blue;
+            background-color: #eee;
+            &:after {
+              content: "";
+              position: absolute;
+              display: none;
+              left: 8px;
+              top: 3px;
+              width: 5px;
+              height: 10px;
+              border: solid white;
+              border-width: 0 3px 3px 0;
+              transform: rotate(45deg);
+            }
+          }
+          &:hover input ~ .checkmark {
+            background-color: #ccc;
+          }
+        }
+        .delete {
+          color: white;
+          width: 30px;
+          height: 30px;
+          background: $mid-red;
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family;
+  font-size: $default-font-size;
+  padding: 5px;
+  border: none;
+  box-shadow: none;
+  background-color: $deep-blue;
+  color: $body-background-gray;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input {
+  border: none;
+  background-image: none;
+  background-color: $body-background-gray;
+  padding: 7px;
+  box-shadow: none;
+  outline: none;
+}
+

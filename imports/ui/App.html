@@ -1,0 +1,51 @@
+<body>
+    {{> mainContainer}}
+</body>
+
+
+<template name="mainContainer">
+    <div class="app">
+        <header>
+            <div class="app-bar">
+                <div class="app-header">
+                    <h1>📝️ To Do List {{incompleteCount}}</h1>
+                </div>
+            </div>
+        </header>
+
+        <div class="main">
+            {{#if isUserLogged}}
+            <div class="user">
+                Hello, {{getUser.username}} <span class="logout" title="Sair">🚪</span>
+            </div>
+            {{> form }}
+
+            <ul class="tasks">
+                {{#each tasks}}
+                {{> task}}
+                {{/each}}
+            </ul>
+            {{else}}
+            {{> login }}
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="form">
+    <div class="task-actions-container">
+        <form class="task-form">
+            <input class="input" type="text" name="text" placeholder="Type to add new tasks" />
+            <button class="btn" type="submit">Add Task</button>
+        </form>
+        <div class="filter">
+            <button class="btn" id="hide-completed-button">
+                {{#if hideCompleted}}
+                Show All
+                {{else}}
+                Hide Completed
+                {{/if}}
+            </button>
+        </div>
+    </div>
+</template>
