@@ -1,7 +1,7 @@
 <template name="task">
     <li class="task-line">
         <label class="checkbox-container"><span class="select-text">{{text}}</span>
-            <input class="toggle-checked" type="checkbox">
+            <input class="toggle-checked" checked={{isChecked}} type="checkbox">
             <span class="checkmark"></span>
         </label>
         <button class="btn delete">&times;</button>

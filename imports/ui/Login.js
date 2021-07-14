@@ -11,8 +11,10 @@ Template.login.events({
 
     const username = target.username.value;
     const password = target.password.value;
-    Meteor.loginWithPassword(username, password, () => {
-      toastr.error("Login error");
+    Meteor.loginWithPassword(username, password, (err) => {
+      if (err) {
+        toastr.error("Login error");
+      }
     });
   },
 });
