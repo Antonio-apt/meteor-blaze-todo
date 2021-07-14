@@ -1,2 +1,0 @@
-{"{}/client/main.scss":"4e16ed18c5dc9235b380072bbf5d0324217ef6c0"}
-{"css":"body {\n  padding: 10px;\n  font-family: sans-serif; }\n  body .task-form {\n    margin-top: 1rem; }\n","sourceMap":{"version":3,"file":".main.scss","sourceRoot":".","sources":["./client/main.scss"],"sourcesContent":["\nbody {\n  padding: 10px;\n  font-family: sans-serif;\n  .task-form {\n    margin-top: 1rem;\n  }\n}\n\n\n"],"names":[],"mappings":"AACA,AAAA,IAAI,CAAC;EACH,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,UAAU,GAIxB;EAND,AAGE,IAHE,CAGF,UAAU,CAAC;IACT,UAAU,EAAE,IAAI,GACjB"}}
