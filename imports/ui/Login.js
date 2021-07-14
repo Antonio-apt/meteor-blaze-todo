@@ -1,5 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
+import toastr from "toastr";
 import "./Login.html";
 
 Template.login.events({
@@ -10,7 +11,8 @@ Template.login.events({
 
     const username = target.username.value;
     const password = target.password.value;
-
-    Meteor.loginWithPassword(username, password);
+    Meteor.loginWithPassword(username, password, () => {
+      toastr.error("Login error");
+    });
   },
 });

@@ -2,6 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
 import { TasksCollection } from "../db/TasksCollection";
 import { ReactiveDict } from "meteor/reactive-dict";
+import toastr from "toastr";
 import "./App.html";
 import "./Task.js";
 import "./Login.js";
@@ -27,6 +28,10 @@ Template.mainContainer.onCreated(function mainContainerOnCreated() {
   this.state = new ReactiveDict();
 });
 
+Template.form.onCreated(function mainContainerOnCreated() {
+  this.state = new ReactiveDict();
+});
+
 Template.mainContainer.events({
   "click .user"() {
     Meteor.logout();
@@ -43,7 +48,6 @@ Template.mainContainer.helpers({
     if (!isUserLogged()) {
       return [];
     }
-
     return TasksCollection.find(
       hideCompleted ? pendingOnlyFilter : userFilter,
       {
@@ -61,6 +65,9 @@ Template.mainContainer.helpers({
     const incompleteTasksCount =
       TasksCollection.find(pendingOnlyFilter).count();
     return incompleteTasksCount ? `(${incompleteTasksCount})` : "";
+  },
+  hideCompleted() {
+    return Template.instance().state.get(HIDE_COMPLETED_STRING);
   },
   isUserLogged() {
     return isUserLogged();
@@ -81,7 +88,13 @@ Template.form.events({
 
     // Insert a task into the collection
     if (text != "") {
-      Meteor.call("tasks.insert", text);
+      Meteor.call("tasks.insert", text, (err, res) => {
+        if (err) {
+          toastr.error("Add task error");
+        } else {
+          toastr.success("Task added successfully");
+        }
+      });
     }
 
     // Clear form
