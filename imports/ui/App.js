@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
-import { TasksCollection } from "../api/TasksCollection";
+import { TasksCollection } from "../db/TasksCollection";
 import { ReactiveDict } from "meteor/reactive-dict";
 import "./App.html";
 import "./Task.js";
@@ -28,10 +28,6 @@ Template.mainContainer.onCreated(function mainContainerOnCreated() {
 });
 
 Template.mainContainer.events({
-  "click #hide-completed-button"(event, instance) {
-    const currentHideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
-    instance.state.set(HIDE_COMPLETED_STRING, !currentHideCompleted);
-  },
   "click .user"() {
     Meteor.logout();
   },
@@ -54,9 +50,6 @@ Template.mainContainer.helpers({
         sort: { createdAt: -1 },
       }
     ).fetch();
-  },
-  hideCompleted() {
-    return Template.instance().state.get(HIDE_COMPLETED_STRING);
   },
   incompleteCount() {
     if (!isUserLogged()) {
@@ -87,13 +80,21 @@ Template.form.events({
     const text = target.text.value;
 
     // Insert a task into the collection
-    TasksCollection.insert({
-      text,
-      userId: getUser()._id,
-      createdAt: new Date(), // current time
-    });
+    if (text != "") {
+      Meteor.call("tasks.insert", text);
+    }
 
     // Clear form
     target.text.value = "";
+  },
+  "click #hide-completed-button"(event, instance) {
+    const currentHideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
+    instance.state.set(HIDE_COMPLETED_STRING, !currentHideCompleted);
+  },
+});
+
+Template.form.helpers({
+  hideCompleted() {
+    return Template.instance().state.get(HIDE_COMPLETED_STRING);
   },
 });
